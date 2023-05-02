@@ -1,15 +1,16 @@
 package com.yearup;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Capstone {
     Scanner scanner = new Scanner(System.in);
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-
         homeScreen(scanner);
-
+        scanner.close();
 
     }
 
@@ -27,37 +28,33 @@ public class Capstone {
                     System.out.print("X.Exit");
 
 
-                    choice = scanner.nextLine();
-                    scanner.next();
+                    choice = scanner.nextLine().trim();
 
-                    switch (choice) {
+
+                    switch (choice.toUpperCase()) {
                         case "D":
-                            System.out.println("Make A Deposit");
-                            System.out.println("Please Enter Your Deposit Information:");
                             depositInfo(scanner);
 
                             break;
 
                         case "P":
-                            System.out.println("Make A Payment");
-                            System.out.println("Please Enter Your Debit Card Info:");
+                            payment(scanner);
 
                             break;
 
                         case "L":
-
-                            System.out.println("Ledger");
-                            System.out.println("Please Enter Your Debit Card Info:");
-
+                            ledger(scanner);
 
                             break;
 
                         case "X":
                             System.out.println("Goodbye!");
+
                             break;
 
                         default:
                             System.out.println("Invalid choice. Please try again.");
+
                             break;
                     }
                 }
@@ -68,9 +65,58 @@ public class Capstone {
 
     }
 
-        public static void depositInfo(Scanner scanner){
-            System.out.println("Please Input Deposit Information");
-             String info = scanner.nextLine();
+   //* private static ArrayList<transactions> getInventory() {
+    //    ArrayList<transactions> inventory = new ArrayList<>();
+    //  String storeInventory = "transaction.csv";
+    //try {
+    //  BufferedReader br = new BufferedReader(new FileReader(storeInventory));
+    // String line;
+    //        while ((line = br.readLine()) != null) {
+    //          String[] parts = line.split("\\|");
+    //        String id = parts[0];
+    //      String name = parts[1];
+    //    Double price = Double.parseDouble(parts[2]);
+    //            inventory.add(new transactions(id, name, price));
+    //       }
+    //        br.close();
+
+    //    } catch (Exception e) {
+
+        //}
+        //return inventory;
+   // }
+
+    public static void depositInfo(Scanner scanner){
+        System.out.println("Make A Deposit");
+        System.out.println("Please Input Deposit Information");
+        String info = scanner.nextLine();
+try {
+
+
+        FileWriter file = new FileWriter("transactions.csv");
+        file.write(info);
+        file.close();
+
+
+}
+
+catch(Exception e) {
+
+    e.printStackTrace();
+}
+
+
+    }
+    public static void payment(Scanner scanner){
+        System.out.println("Make A Payment");
+        System.out.println("Please Input ");
+        String pInfo = scanner.nextLine();
+
+    }
+    public static void ledger(Scanner scanner){
+        System.out.println("Welcome to Ledger");
+        System.out.println("Please Input Information");
+        String lInfo = scanner.nextLine();
 
     }
 
