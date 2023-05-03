@@ -57,9 +57,17 @@ public class Transaction {
     public void setAmount(double amount) {
         this.amount = amount;
     }
-}
-    /*public String toString{
-        return date + "|" + time.format(DateTimeFormatter.ofPattern("HH:mm:ss")) + "|" + description + "|" + vendor + "|" + amount;
+
+    @Override
+    public String toString() {
+        return "Transaction{" +
+                "date=" + date +
+                ", time=" + time +
+                ", description='" + description + '\'' +
+                ", vendor='" + vendor + '\'' +
+                ", amount=" + amount +
+                '}';
     }
-    */
+}
+
 

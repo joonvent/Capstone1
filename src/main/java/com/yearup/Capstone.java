@@ -10,16 +10,18 @@ import java.util.Scanner;
 public class Capstone {
     static Scanner scanner = new Scanner(System.in);
     static ArrayList<Transaction> transactions = new ArrayList<>();
-static DateTimeFormatter formatter;
+    static DateTimeFormatter dateFormatter;
+    static DateTimeFormatter timeFormatter;
 
     public static void main(String[] args) throws IOException {
-
         homeScreen(scanner);
         scanner.close();
+
 
     }
 
     public static void homeScreen(Scanner scanner) throws IOException {
+        displayTransaction();
         String choice = "";
         while (!choice.equalsIgnoreCase("x")) {
             // if (!choice.equalsIgnoreCase("P")) {
@@ -71,41 +73,37 @@ static DateTimeFormatter formatter;
                     break;
             }
         }
-
-
-        //}
-        // }
-
     }
 
-    public static ArrayList<Transaction> displayTransaction() {
+    public static void displayTransaction() {
 
         String storeTransactions = "transaction.csv";
+
         try {
             BufferedReader br = new BufferedReader(new FileReader(storeTransactions));
-            String line;
+            String line = "";
             while ((line = br.readLine()) != null) {
                 String[] parts = line.split("\\|");
 
-                formatter= DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                timeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
 
-                LocalDate date = LocalDate.parse(parts[0]);
-                LocalTime time = LocalTime.parse(parts[1]);
+                LocalDate date = LocalDate.parse(parts[0], dateFormatter);
+                LocalTime time = LocalTime.parse(parts[1],timeFormatter);
 
                 String description = parts[2];
                 String vendor = parts[3];
                 Double amount = Double.parseDouble(parts[4]);
 
-
-
-                transactions.add(new Transaction(date, time, description, vendor, amount));
+                Transaction newTransaction = new Transaction(date, time, description, vendor, amount);
+                transactions.add(newTransaction);
+                System.out.println(newTransaction);
             }
             br.close();
 
         } catch (Exception e) {
-
+            System.out.println("Testing");
         }
-        return transactions;
     }
 
     public static void depositInfo() {
@@ -119,6 +117,8 @@ static DateTimeFormatter formatter;
         String time = scanner.nextLine();
         System.out.print("Please Enter A Description of the Deposit:");
         String description = scanner.nextLine();
+        System.out.print("Please Enter The Vendor of the Payment:");
+        String vendor = scanner.nextLine();
         System.out.print("Please Enter The Total Amount:");
         Double amount = scanner.nextDouble();
 
@@ -126,7 +126,7 @@ static DateTimeFormatter formatter;
         try {
 
             FileWriter file = new FileWriter("transaction.csv", true);
-            file.write(date + "|" + time + "|" + description + "|" + amount + "\n");
+            file.write(date + "|" + time + "|" + description + "|" + vendor + "|"+ amount + "\n");
             file.close();
 
 
@@ -149,14 +149,16 @@ static DateTimeFormatter formatter;
         String time = scanner.nextLine();
         System.out.print("Please Enter A Description of the Payment:");
         String description = scanner.nextLine();
-        System.out.print("Please Enter The Total Amount:");
+        System.out.print("Please Enter Vendor of the Payment:");
+        String vendor = scanner.nextLine();
+        System.out.print("Please Enter The Total Amount(Followed by '-'):");
         Double amount = scanner.nextDouble();
 
         try {
 
 
             FileWriter file = new FileWriter("transaction.csv", true);
-            file.write(date + "|" + time + "|" + description + "|" + amount + "\n");
+            file.write(date + "|" + time + "|" + description + "|" +vendor  + "|" + amount + "\n");
             file.close();
 
 
@@ -175,16 +177,12 @@ static DateTimeFormatter formatter;
         System.out.println("Please Select One bellow:");
         String choice = "";
         while (!choice.equalsIgnoreCase("x")) {
-
-
             System.out.println("Select One:");
             System.out.println("------------------");
             System.out.println("A.Display All Entries");
             System.out.println("D.Display All Deposits");
             System.out.println("P.Display All Payments");
             System.out.println("R.Reports");
-
-
             choice = scanner.nextLine().trim();
 
 
@@ -231,17 +229,9 @@ static DateTimeFormatter formatter;
         // The table should have columns for date, time, vendor, type, and amount.
         // The total balance of all transactions should be displayed at the bottom of the table.
         System.out.println("Here Are All Transactions:");
-        FileReader fileReader = new FileReader("transactions.csv");
-        BufferedReader br = new BufferedReader(fileReader);
-        String input;
-        while ((input = br.readLine()) != null) {
-            System.out.println(input);
-
-
+        for (int i = 0 ; i < transactions.size(); i++){
+        System.out.println(transactions.get(i));
         }
-        br.close();
-
-
     }
 
     public static void displayDeposits() {
