@@ -115,7 +115,7 @@ public class Capstone {
         System.out.println("Please Input Deposit Information");
         System.out.print("Please Enter Date of Deposit(YYYY-mm-dd):");
         String date = scanner.nextLine();
-        System.out.print("Please Enter Time:");
+        System.out.print("Please Enter Time(hh:mm:ss):");
         String time = scanner.nextLine();
         System.out.print("Please Enter A Description of the Deposit:");
         String description = scanner.nextLine();
@@ -135,7 +135,10 @@ public class Capstone {
         } catch (Exception e) {
 
             e.printStackTrace();
+
+
         }
+
 
 
     }
@@ -147,7 +150,7 @@ public class Capstone {
 
         System.out.print("Please Enter Date of Payment(YYYY-mm-dd):");
         String date = scanner.nextLine();
-        System.out.print("Please Enter Time:");
+        System.out.print("Please Enter Time(hh:mm:ss):");
         String time = scanner.nextLine();
         System.out.print("Please Enter A Description of the Payment:");
         String description = scanner.nextLine();
@@ -273,7 +276,7 @@ public class Capstone {
     }
 
 
-    private static void reportsMenu(Scanner scanner) {
+    private static void reportsMenu(Scanner scanner) throws IOException {
         boolean running = true;
         while (running) {
             System.out.println("Reports");
@@ -293,7 +296,7 @@ public class Capstone {
                         LocalDate date = LocalDate.now();//get todays date
 
                         if (transactions.getDate().getMonth() == date.getMonth()) {//going to get date and month from array, to compare if theyre equal
-                            System.out.println(transactions.getDate() + " " + transactions.getVendor() + " " + transactions.getDescription());//If theyre equal this will print
+                            System.out.println(transactions.getDate() + " | " + transactions.getVendor() + " | " + transactions.getDescription());//If theyre equal this will print
                         }
                     }
                     break;
@@ -303,7 +306,7 @@ public class Capstone {
                             LocalDate previousMonth = date.minusMonths(1);//new variable called previous month,Going to remove 1 from the month so that it only displays the LAST months transactions
 
                             if (transactions.getDate().getMonth() == previousMonth.getMonth()) { //If the month is equal to previous month
-                                System.out.println(transactions.getDate() + " " + transactions.getVendor() + " " + transactions.getDescription());//perform this action
+                                System.out.println(transactions.getDate() + " | " + transactions.getVendor() + " | " + transactions.getDescription());//perform this action
                             }
                         }
 
@@ -314,7 +317,7 @@ public class Capstone {
                         LocalDate date = LocalDate.now();//get todays date
 
                         if (transactions.getDate().getYear() == date.getYear()) {//going to get the year, to compare if theyre equal
-                            System.out.println(transactions.getDate() + " " + transactions.getVendor() + " " + transactions.getDescription());//If theyre equal this will print all transactions within with year
+                            System.out.println(transactions.getDate() + " | " + transactions.getVendor() + " | " + transactions.getDescription());//If theyre equal this will print all transactions within with year
                         }
                     }
                     break;
@@ -325,7 +328,7 @@ public class Capstone {
                         LocalDate yearToDate = date.minusYears(1);
 
                         if (transactions.getDate().getYear() == yearToDate.getYear()) {//going to get date and month from array
-                            System.out.println(transactions.getDate() + " " + transactions.getVendor() + " " + transactions.getDescription());
+                            System.out.println(transactions.getDate() + " | " + transactions.getVendor() + " | " + transactions.getDescription() + " | ");
 
                         }
 
@@ -333,11 +336,20 @@ public class Capstone {
                     break;
 
                      case "5":
-                    // Prompt the user to enter a vendor name, then generate a report for all transactions
-                    // with that vendor, including the date, vendor, and amount for each transaction.
-                    // The report should include a total of all transaction amounts for the vendor.
-                case "0":
+                            System.out.println("Search By Vendor");
+                             System.out.println("Please Enter The Vendor You Are Searching For:");
+                             String searchVendor = scanner.nextLine();
 
+                         for (Transaction transactions : transactions) {
+
+                             if (transactions.getVendor().equalsIgnoreCase(searchVendor)){
+                                 System.out.println("Transactions Matched With Vendor\n" + transactions.getDate()+ " | " + transactions.getVendor() + " | " +transactions.getDescription() + " | " + transactions.getAmount()+" | " );
+                             }
+                         }
+
+                         break;
+                case "0":
+                        ledger(scanner);
                     running = false;
                     break;
                 default:
@@ -347,32 +359,5 @@ public class Capstone {
         }
     }
 }
-
-/*
-    private static void filterTransactionsByDate(LocalDate startDate, LocalDate endDate) {
-        // This method filters the transactions by date and prints a report to the console.
-        // It takes two parameters: startDate and endDate, which represent the range of dates to filter by.
-        // The method loops through the transactions list and checks each transaction's date against the date range.
-        // Transactions that fall within the date range are printed to the console.
-        // If no transactions fall within the date range, the method prints a message indicating that there are no results.
-    }
-
-    private static void filterTransactionsByVendor(String vendor) {
-        // This method filters the transactions by vendor and prints a report to the console.
-        // It takes one parameter: vendor, which represents the name of the vendor to filter by.
-        // The method loops through the transactions list and checks each transaction's vendor name against the specified vendor name.
-        // Transactions with a matching vendor name are printed to the console.
-        // If no transactions match the specified vendor name, the method prints a message indicating that there are no results.
-    }
-}
-*/
-
-
-
-
-
-
-
-
 
 

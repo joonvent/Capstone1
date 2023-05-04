@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="03d343fc-414c-47b9-8bf7-39d8bcfdf038" name="Changes" comment="4TH Day Commit 1">
+    <list default="true" id="03d343fc-414c-47b9-8bf7-39d8bcfdf038" name="Changes" comment="4TH Day Commit 2">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/yearup/Capstone.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/yearup/Capstone.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/transaction.csv" beforeDir="false" afterPath="$PROJECT_DIR$/transaction.csv" afterDir="false" />
@@ -36,6 +36,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "main",
     "last_opened_file_path": "/Users/juniorventura/Desktop/LearnToCode_Capstones/Capstone1/AccountingLedgerApplication"
   }
 }]]></component>
@@ -96,7 +97,28 @@
       <option name="project" value="LOCAL" />
       <updated>1683210186386</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="4TH Day Commit 2">
+      <created>1683216725760</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1683216725760</updated>
+    </task>
+    <task id="LOCAL-00006" summary="4TH Day Commit 2">
+      <created>1683216766113</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1683216766113</updated>
+    </task>
+    <task id="LOCAL-00007" summary="4TH Day Commit 2">
+      <created>1683216986895</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1683216986895</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="UnknownFeatures">
@@ -118,7 +140,8 @@
     <MESSAGE value="3rd Day 1" />
     <MESSAGE value="3rd Day Commit 2" />
     <MESSAGE value="4TH Day Commit 1" />
-    <option name="LAST_COMMIT_MESSAGE" value="4TH Day Commit 1" />
+    <MESSAGE value="4TH Day Commit 2" />
+    <option name="LAST_COMMIT_MESSAGE" value="4TH Day Commit 2" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
