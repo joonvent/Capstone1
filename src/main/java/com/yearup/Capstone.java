@@ -113,7 +113,7 @@ public class Capstone {
         System.out.println("Make A Deposit");
         System.out.println("--------------");
         System.out.println("Please Input Deposit Information");
-        System.out.print("Please Enter Date of Deposit:");
+        System.out.print("Please Enter Date of Deposit(YYYY-mm-dd):");
         String date = scanner.nextLine();
         System.out.print("Please Enter Time:");
         String time = scanner.nextLine();
@@ -145,7 +145,7 @@ public class Capstone {
         System.out.println("--------------");
         System.out.println("Please Input Payment Info");
 
-        System.out.print("Please Enter Date of Payment:");
+        System.out.print("Please Enter Date of Payment(YYYY-mm-dd):");
         String date = scanner.nextLine();
         System.out.print("Please Enter Time:");
         String time = scanner.nextLine();
@@ -153,7 +153,7 @@ public class Capstone {
         String description = scanner.nextLine();
         System.out.print("Please Enter Vendor of the Payment:");
         String vendor = scanner.nextLine();
-        System.out.print("Please Enter The Total Amount(Followed by '-'):");
+        System.out.print("Please Enter The Total Amount:");
         Double amount = scanner.nextDouble();
 
         try {
@@ -289,49 +289,68 @@ public class Capstone {
 
                 switch (input) {
                 case "1":
+                    for (Transaction transactions : transactions) { //looping through transactions
+                        LocalDate date = LocalDate.now();//get todays date
 
-                    LocalDate date= LocalDate.now();
-                    LocalDate firstDayOfMonth = LocalDate.of(date.getYear(), date.getMonth(), 1);
-                    ArrayList<Transaction> transactionsThisMonth = new ArrayList<>();
-                    for (Transaction transaction : transactions){
-                        LocalDate transactionDate = transaction.getDate();
-                        if (transactionDate.isAfter(firstDayOfMonth.minusDays(1) )&& transactionDate.isBefore(date.plusDays(1))){
-                            transactionsThisMonth.add(transaction);
+
+
+                        if (transactions.getDate().getMonth() == date.getMonth()) {//going to get date and month from array, to compare if theyre equal
+                            System.out.println(transactions.getDate() + " " + transactions.getVendor() + " " + transactions.getDescription());//If theyre equal this will print
+                        }
+                    }
+                    break;
+                    case "2":
+                        for (Transaction transactions : transactions) {//looping through
+                            LocalDate date = LocalDate.now();//get todays date
+                            LocalDate previousMonth = date.minusMonths(1);//new variable called previous month,Going to remove 1 from the month so that it only displays the LAST months transactions
+
+
+                            if (transactions.getDate().getMonth() == previousMonth.getMonth()) { //If the month is equal to previous month
+                                System.out.println(transactions.getDate() + " " + transactions.getVendor() + " " + transactions.getDescription());//perform this action
+                            }
                         }
 
-
-                    }
-
-                    for (Transaction transaction : transactionsThisMonth){
-                        System.out.println(transaction);
-                    }
-
-
-                  //  System.out.println("todays date is " + date);
-
                     break;
-                    // Generate a report for all transactions within the current month,
-                    // including the date, vendor, and amount for each transaction.
-                    // The report should include a total of all transaction amounts for the month.
-                case "2":
-                    // Generate a report for all transactions within the previous month,
-                    // including the date, vendor, and amount for each transaction.
-                    // The report should include a total of all transaction amounts for the month.
                 case "3":
+                    for (Transaction transactions : transactions) { //looping through transactions
+                        LocalDate date = LocalDate.now();//get todays date
+
+
+
+
+                        if (transactions.getDate().getYear() == date.getYear()) {//going to get date and month from array, to compare if theyre equal
+                            System.out.println(transactions.getDate() + " " + transactions.getVendor() + " " + transactions.getDescription());//If theyre equal this will print
+                        }
+                    }
+                    break;
+
+
                     // Generate a report for all transactions within the current year,
                     // including the date, vendor, and amount for each transaction.
                     // The report should include a total of all transaction amounts for the year.
 
                 case "4":
-                    // Generate a report for all transactions within the previous year,
-                    // including the date, vendor, and amount for each transaction.
-                    // The report should include a total of all transaction amounts for the year.
+                    for (Transaction transactions : transactions) {
+                        LocalDate date = LocalDate.now();//get todays date
+
+                        LocalDate yearToDate = date.minusYears(1);
+
+                        if (transactions.getDate().getYear() == yearToDate.getYear()) {//going to get date and month from array
+                            System.out.println(transactions.getDate() + " " + transactions.getVendor() + " " + transactions.getDescription());
+
+                        }
+
+                    }
+                    break;
+
                 case "5":
                     // Prompt the user to enter a vendor name, then generate a report for all transactions
                     // with that vendor, including the date, vendor, and amount for each transaction.
                     // The report should include a total of all transaction amounts for the vendor.
                 case "0":
+
                     running = false;
+                    break;
                 default:
                     System.out.println("Invalid option");
                     break;
