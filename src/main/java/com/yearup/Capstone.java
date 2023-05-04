@@ -1,6 +1,7 @@
 package com.yearup;
 
 import java.io.*;
+import java.sql.SQLOutput;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -12,6 +13,7 @@ public class Capstone {
     static ArrayList<Transaction> transactions = new ArrayList<>();
     static DateTimeFormatter dateFormatter;
     static DateTimeFormatter timeFormatter;
+
 
     public static void main(String[] args) throws IOException {
         homeScreen(scanner);
@@ -89,7 +91,7 @@ public class Capstone {
                 timeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
 
                 LocalDate date = LocalDate.parse(parts[0], dateFormatter);
-                LocalTime time = LocalTime.parse(parts[1],timeFormatter);
+                LocalTime time = LocalTime.parse(parts[1], timeFormatter);
 
                 String description = parts[2];
                 String vendor = parts[3];
@@ -126,7 +128,7 @@ public class Capstone {
         try {
 
             FileWriter file = new FileWriter("transaction.csv", true);
-            file.write(date + "|" + time + "|" + description + "|" + vendor + "|"+ amount + "\n");
+            file.write(date + "|" + time + "|" + description + "|" + vendor + "|" + amount + "\n");
             file.close();
 
 
@@ -158,7 +160,7 @@ public class Capstone {
 
 
             FileWriter file = new FileWriter("transaction.csv", true);
-            file.write(date + "|" + time + "|" + description + "|" +vendor  + "|" + amount + "\n");
+            file.write(date + "|" + time + "|" + description + "|" + vendor + "|" + amount + "\n");
             file.close();
 
 
@@ -183,6 +185,7 @@ public class Capstone {
             System.out.println("D.Display All Deposits");
             System.out.println("P.Display All Payments");
             System.out.println("R.Reports");
+            System.out.println("H.Return Home");
             choice = scanner.nextLine().trim();
 
 
@@ -207,11 +210,15 @@ public class Capstone {
                     break;
 
                 case "R":
-                    //reports();
+                    reportsMenu(scanner);
                     System.out.println("Reports");
                     System.out.println("Press any key to continue or X to exit.");
                     choice = scanner.nextLine().trim();
                     break;
+
+
+                case "H":
+                    return;
 
 
                 default:
@@ -229,8 +236,8 @@ public class Capstone {
         // The table should have columns for date, time, vendor, type, and amount.
         // The total balance of all transactions should be displayed at the bottom of the table.
         System.out.println("Here Are All Transactions:");
-        for (int i = 0 ; i < transactions.size(); i++){
-        System.out.println(transactions.get(i));
+        for (int i = 0; i < transactions.size(); i++) {
+            System.out.println(transactions.get(i));
         }
     }
 
@@ -240,6 +247,13 @@ public class Capstone {
         // The total amount of all deposits should be displayed at the bottom of the table.
         System.out.println("Here Are All Deposits:");
         System.out.println("----------------------");
+        for (Transaction deposit : transactions) {
+            if (deposit.getAmount() > 0) {
+                System.out.println(deposit.getDate() + " " + deposit.getTime() + " " + deposit.getDescription() + " " + deposit.getVendor() + " " + deposit.getAmount());
+            }
+
+        }
+
 
     }
 
@@ -249,28 +263,53 @@ public class Capstone {
         // The total amount of all payments should be displayed at the bottom of the table.
         System.out.println("Here Are All Payments:");
         System.out.println("---------------------:");
+        for (Transaction payment : transactions) {
+            if (payment.getAmount() < 0) {
+                System.out.println(payment.getDate() + " " + payment.getTime() + " " + payment.getDescription() + " " + payment.getVendor() + " " + payment.getAmount());
+            }
 
 
+        }
     }
-}
 
 
-   /* private static void reportsMenu(Scanner scanner) {
+    private static void reportsMenu(Scanner scanner) {
         boolean running = true;
         while (running) {
             System.out.println("Reports");
-            System.out.println("Choose an option:");
+            System.out.printf("Choose an option:%n%n");
             System.out.println("1) Month To Date");
             System.out.println("2) Previous Month");
             System.out.println("3) Year To Date");
             System.out.println("4) Previous Year");
             System.out.println("5) Search by Vendor");
             System.out.println("0) Back");
-
             String input = scanner.nextLine().trim();
 
-            switch (input) {
+
+                switch (input) {
                 case "1":
+
+                    LocalDate date= LocalDate.now();
+                    LocalDate firstDayOfMonth = LocalDate.of(date.getYear(), date.getMonth(), 1);
+                    ArrayList<Transaction> transactionsThisMonth = new ArrayList<>();
+                    for (Transaction transaction : transactions){
+                        LocalDate transactionDate = transaction.getDate();
+                        if (transactionDate.isAfter(firstDayOfMonth.minusDays(1) )&& transactionDate.isBefore(date.plusDays(1))){
+                            transactionsThisMonth.add(transaction);
+                        }
+
+
+                    }
+
+                    for (Transaction transaction : transactionsThisMonth){
+                        System.out.println(transaction);
+                    }
+
+
+                  //  System.out.println("todays date is " + date);
+
+                    break;
                     // Generate a report for all transactions within the current month,
                     // including the date, vendor, and amount for each transaction.
                     // The report should include a total of all transaction amounts for the month.
@@ -299,8 +338,9 @@ public class Capstone {
             }
         }
     }
+}
 
-
+/*
     private static void filterTransactionsByDate(LocalDate startDate, LocalDate endDate) {
         // This method filters the transactions by date and prints a report to the console.
         // It takes two parameters: startDate and endDate, which represent the range of dates to filter by.
