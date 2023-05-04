@@ -288,11 +288,9 @@ public class Capstone {
 
 
                 switch (input) {
-                case "1":
+                    case "1":
                     for (Transaction transactions : transactions) { //looping through transactions
                         LocalDate date = LocalDate.now();//get todays date
-
-
 
                         if (transactions.getDate().getMonth() == date.getMonth()) {//going to get date and month from array, to compare if theyre equal
                             System.out.println(transactions.getDate() + " " + transactions.getVendor() + " " + transactions.getDescription());//If theyre equal this will print
@@ -304,35 +302,26 @@ public class Capstone {
                             LocalDate date = LocalDate.now();//get todays date
                             LocalDate previousMonth = date.minusMonths(1);//new variable called previous month,Going to remove 1 from the month so that it only displays the LAST months transactions
 
-
                             if (transactions.getDate().getMonth() == previousMonth.getMonth()) { //If the month is equal to previous month
                                 System.out.println(transactions.getDate() + " " + transactions.getVendor() + " " + transactions.getDescription());//perform this action
                             }
                         }
 
                     break;
-                case "3":
+
+                    case "3":
                     for (Transaction transactions : transactions) { //looping through transactions
                         LocalDate date = LocalDate.now();//get todays date
 
-
-
-
-                        if (transactions.getDate().getYear() == date.getYear()) {//going to get date and month from array, to compare if theyre equal
-                            System.out.println(transactions.getDate() + " " + transactions.getVendor() + " " + transactions.getDescription());//If theyre equal this will print
+                        if (transactions.getDate().getYear() == date.getYear()) {//going to get the year, to compare if theyre equal
+                            System.out.println(transactions.getDate() + " " + transactions.getVendor() + " " + transactions.getDescription());//If theyre equal this will print all transactions within with year
                         }
                     }
                     break;
 
-
-                    // Generate a report for all transactions within the current year,
-                    // including the date, vendor, and amount for each transaction.
-                    // The report should include a total of all transaction amounts for the year.
-
-                case "4":
+                    case "4":
                     for (Transaction transactions : transactions) {
                         LocalDate date = LocalDate.now();//get todays date
-
                         LocalDate yearToDate = date.minusYears(1);
 
                         if (transactions.getDate().getYear() == yearToDate.getYear()) {//going to get date and month from array
@@ -343,7 +332,7 @@ public class Capstone {
                     }
                     break;
 
-                case "5":
+                     case "5":
                     // Prompt the user to enter a vendor name, then generate a report for all transactions
                     // with that vendor, including the date, vendor, and amount for each transaction.
                     // The report should include a total of all transaction amounts for the vendor.
