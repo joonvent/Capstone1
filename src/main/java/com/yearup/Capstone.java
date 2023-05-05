@@ -1,7 +1,6 @@
 package com.yearup;
 
 import java.io.*;
-import java.sql.SQLOutput;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -27,8 +26,7 @@ public class Capstone {
         displayTransaction();
         String choice = "";
         while (!choice.equalsIgnoreCase("x")) {
-            // if (!choice.equalsIgnoreCase("P")) {
-            //  if (!choice.equalsIgnoreCase("D")) {
+
             System.out.println("Ledger Accounting Application");
             System.out.println("------------------");
             System.out.println("D.Make Deposit");
@@ -42,24 +40,25 @@ public class Capstone {
 
             switch (choice.toUpperCase()) {
                 case "D":
+
+                    depositInfo();
+                    System.out.println("Thank You Deposit Added!");
                     System.out.println("Press any key to continue or X to exit.");
                     choice = scanner.nextLine().trim();
-                    depositInfo();
-
 
                     break;
 
                 case "P":
+
+                    payment(scanner);
+                    System.out.println("Thank you Payment Added!");
                     System.out.println("Press any key to continue or X to exit.");
                     choice = scanner.nextLine().trim();
-                    payment(scanner);
-
 
                     break;
 
                 case "L":
-                    System.out.println("Press any key to continue or X to exit.");
-                    choice = scanner.nextLine().trim();
+
                     ledger(scanner);
 
 
@@ -178,9 +177,7 @@ public class Capstone {
 
 
     public static void ledger(Scanner scanner) throws IOException {
-        System.out.println("Welcome to Ledger");
-        System.out.println("-----------------");
-        System.out.println("Please Select One bellow:");
+        System.out.println("_____Welcome to Ledger_____");
         String choice = "";
         while (!choice.equalsIgnoreCase("x")) {
             System.out.println("Select One:");
@@ -197,26 +194,26 @@ public class Capstone {
                 case "A":
 
                     displayALl();
-                    System.out.println("Press any key to continue or X to exit.");
+                    System.out.println("Press any key to go back or X to exit.");
                     choice = scanner.nextLine().trim();
                     break;
 
                 case "D":
                     displayDeposits();
-                    System.out.println("Press any key to continue or X to exit.");
+                    System.out.println("Press any key to go back or X to exit.");
                     choice = scanner.nextLine().trim();
                     break;
 
                 case "P":
                     displayPayments();
-                    System.out.println("Press any key to continue or X to exit.");
+                    System.out.println("Press any key to go back or X to exit.");
                     choice = scanner.nextLine().trim();
                     break;
 
                 case "R":
                     reportsMenu(scanner);
                     System.out.println("Reports");
-                    System.out.println("Press any key to continue or X to exit.");
+                    System.out.println("Press any key to go back or X to exit.");
                     choice = scanner.nextLine().trim();
                     break;
 
