@@ -15,6 +15,7 @@ public class Capstone {
     static DateTimeFormatter timeFormatter;
 
 
+
     public static void main(String[] args) throws IOException {
         homeScreen(scanner);
         scanner.close();
@@ -163,7 +164,7 @@ public class Capstone {
 
 
             FileWriter file = new FileWriter("transaction.csv", true);
-            file.write(date + "|" + time + "|" + description + "|" + vendor + "|" + amount + "\n");
+            file.write(date + "|" + time + "|" + description + "|" + vendor + "|" + "-"+amount + "\n");
             file.close();
 
 
@@ -239,8 +240,12 @@ public class Capstone {
         // The table should have columns for date, time, vendor, type, and amount.
         // The total balance of all transactions should be displayed at the bottom of the table.
         System.out.println("Here Are All Transactions:");
-        for (int i = 0; i < transactions.size(); i++) {
-            System.out.println(transactions.get(i));
+        for(Transaction all : transactions){
+            if (all.getAmount() > 0){
+
+            }
+        //for (int i = 0; i < transactions.size(); i++) {
+            System.out.println(all.getDate() + " | " + all.getTime() + " | " + all.getDescription() + " | " + all.getVendor() + " | " + all.getAmount()+ " |");
         }
     }
 
@@ -252,7 +257,7 @@ public class Capstone {
         System.out.println("----------------------");
         for (Transaction deposit : transactions) {
             if (deposit.getAmount() > 0) {
-                System.out.println(deposit.getDate() + " " + deposit.getTime() + " " + deposit.getDescription() + " " + deposit.getVendor() + " " + deposit.getAmount());
+                System.out.println(deposit.getDate() + " | " + deposit.getTime() + " | " + deposit.getDescription() + " | " + deposit.getVendor() + " | " + deposit.getAmount() + " |");
             }
 
         }
@@ -268,7 +273,7 @@ public class Capstone {
         System.out.println("---------------------:");
         for (Transaction payment : transactions) {
             if (payment.getAmount() < 0) {
-                System.out.println(payment.getDate() + " " + payment.getTime() + " " + payment.getDescription() + " " + payment.getVendor() + " " + payment.getAmount());
+                System.out.println(payment.getDate() + " | " + payment.getTime() + " | " + payment.getDescription() + " | " + payment.getVendor() + " | " + payment.getAmount() +" |");
             }
 
 
@@ -297,8 +302,11 @@ public class Capstone {
 
                         if (transactions.getDate().getMonth() == date.getMonth()) {//going to get date and month from array, to compare if theyre equal
                             System.out.println(transactions.getDate() + " | " + transactions.getVendor() + " | " + transactions.getDescription());//If theyre equal this will print
+
                         }
                     }
+                        System.out.println("----------------------------------------");
+                        System.out.println("Here Are Your Month to Date Transactions");
                     break;
                     case "2":
                         for (Transaction transactions : transactions) {//looping through
@@ -307,8 +315,11 @@ public class Capstone {
 
                             if (transactions.getDate().getMonth() == previousMonth.getMonth()) { //If the month is equal to previous month
                                 System.out.println(transactions.getDate() + " | " + transactions.getVendor() + " | " + transactions.getDescription());//perform this action
+
                             }
                         }
+                        System.out.println("----------------------------------------");
+                        System.out.println("Here Are Your Previous Month Transactions");
 
                     break;
 
@@ -318,8 +329,11 @@ public class Capstone {
 
                         if (transactions.getDate().getYear() == date.getYear()) {//going to get the year, to compare if theyre equal
                             System.out.println(transactions.getDate() + " | " + transactions.getVendor() + " | " + transactions.getDescription());//If theyre equal this will print all transactions within with year
+
                         }
                     }
+                        System.out.println("----------------------------------------");
+                        System.out.println("Here Are Your Year to Date Transactions");
                     break;
 
                     case "4":
@@ -333,6 +347,8 @@ public class Capstone {
                         }
 
                     }
+                        System.out.println("----------------------------------------");
+                        System.out.println("Here Are Your Previous Year Transactions");
                     break;
 
                      case "5":
